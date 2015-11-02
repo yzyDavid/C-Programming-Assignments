@@ -1,34 +1,30 @@
 #include "stdio.h"
 #include "math.h"
 
-int isPrime(int);
+int isPrime(int n);
 
 int main(void)
 {
-	int count, i, j, m, n;
-	int flag=0;
-	count=0;
+	int i, j, k, m, looptimes;
 
-	scanf("%d%d", &m, &n);
-	if(m % 2 != 0) m = m + 1;
-	if(m >= 6)
+	scanf("%d", &looptimes);
+	for(i=1;i<=looptimes;i++)
 	{
-		for(i=m;i<=n;i+=2)
-		{
-			for(j=2;j<i/2+1;j++)
-			{
-				if(isPrime(j)&&isPrime(i-j))
-				{
-					if(count%5==0&&flag!=0)
-						printf("\n");
-					printf("%d=%d+%d ",i,j,i-j);
-					count++;
-					flag=1;
-					break;
-				}
-			}
-		}
-	}
+		scanf("%d",&m);
+		printf("%d = ",m);
+		k=m;
+		for(j=2;j<=k;j++)
+            if(m%j==0&&isPrime(j))
+            {
+                printf("%d",j);
+                m/=j;
+                j--;
+                if(1!=m)
+                    printf("*");
+            }
+
+        printf("\n");
+    }
 }
 
 int isPrime(int n)
