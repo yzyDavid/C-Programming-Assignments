@@ -11,6 +11,7 @@ int main(void)
 		maximum=max(a,b);
 		printf("max(%d,%d) = %d\n", a, b, maximum);
 	}
+	return 0;
 }
 
 int max(int a, int b)
