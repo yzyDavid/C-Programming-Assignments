@@ -1,59 +1,58 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+#include<stdio.h>
+#include<assert.h>
 
-typedef struct node
-{
-	int n;
-	struct node *p;
-} stu;
+#define A assert(*p < 60 && -*p > -60);
 
-int main()
+int main(void)
 {
-	int m, n;
-	int i;
-	int a = 0;
-	stu *head = NULL;
-	stu *next = NULL;
-	stu *cache = NULL;
+	int count, i, m, n, no;
+	int num[50];
+	int *p;
+
 	scanf("%d%d", &n, &m);
-	head = (stu*) malloc(sizeof(stu));
-	head -> n = 1;
-	next = head;
-	assert(head);
-	assert(head -> n);
-	assert(!head -> p);
-	for (i = 2; i <= n; i++)
-	{
-		next -> p = (stu*) malloc(sizeof(stu));
-		next -> p -> n = i;
-		assert(next);
-		assert(next -> p);
-		next = next -> p;
-	}
-	next -> p = head;
-	assert(head);
-	assert(next);
-	assert(next -> p);
-	assert(head -> p);
+	for (i = 0; i < n; i++)
+		num[i] = i + 1;
+	p = num;
+	count = n;
+	no = 0;
 
-	i = 0;
+	A
+	printf("%p",&num);
+	printf("%p",&p);
+	printf("%p",&(int*)(num + n));
+	printf("%p",&(num[n]));
 
-	while (next -> p != next)
+	while (count != 1)
 	{
-		i++;
-		if (i == m)
+		A
+		if (*p == 0)
 		{
-			i = 1;
-			cache = next -> p -> p;
-			printf("No %d: %d\n", ++a, next -> p -> n);
-			free(next -> p);
-			next -> p = cache;
+			p++;
+			if (p == num + n)
+				p = num;
+			A
+			continue;
 		}
-		next = next -> p;
+		no++;
+		if (no == m)
+		{
+			A
+			no = 0;
+			count--;
+			printf("No%d: %d\n", n - count, *p);
+			*p = 0;
+			A
+		}
+		p++;
+		if (p == num + n)
+			p = num;
 	}
 
-	printf("Last No is: %d\n", next -> n);
-
-	return 0;
+	A
+	p = num;
+	A
+	while (*p == 0)
+		p++;
+	printf("Last No is: %d\n", *p);
 }
+
